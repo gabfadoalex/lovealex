@@ -1,0 +1,84 @@
+// Função para adicionar uma foto na galeria
+function adicionarFoto() {
+    const inputFoto = document.getElementById('uploadFoto');
+    const galeria = document.getElementById('galeria');
+
+    if (inputFoto.files && inputFoto.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            galeria.appendChild(img);
+
+            // Salva a foto no Local Storage
+            salvarImagemNoLocalStorage(e.target.result);
+        };
+        reader.readAsDataURL(inputFoto.files[0]);
+    }
+}
+
+// Função para salvar uma imagem no Local Storage
+function salvarImagemNoLocalStorage(src) {
+    let fotos = JSON.parse(localStorage.getItem('fotos')) || [];
+    fotos.push(src);
+    localStorage.setItem('fotos', JSON.stringify(fotos));
+}
+
+// Função para carregar as fotos salvas no Local Storage
+function carregarFotos() {
+    let fotos = JSON.parse(localStorage.getItem('fotos')) || [];
+    const galeria = document.getElementById('galeria');
+
+    fotos.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        galeria.appendChild(img);
+    });
+}
+
+// Função para adicionar uma carta/texto
+function adicionarCarta() {
+    const textoCarta = document.getElementById('cartaTexto').value;
+    const listaCartas = document.getElementById('listaCartas');
+
+    if (textoCarta.trim() !== "") {
+        const carta = document.createElement('div');
+        carta.className = 'carta';
+        carta.textContent = textoCarta;
+        listaCartas.appendChild(carta);
+
+        // Salva a carta no Local Storage
+        salvarCartaNoLocalStorage(textoCarta);
+
+        // Limpa o campo de texto após adicionar a carta
+        document.getElementById('cartaTexto').value = "";
+    } else {
+        alert("Por favor, escreva algo antes de adicionar!");
+    }
+}
+
+// Função para salvar uma carta no Local Storage
+function salvarCartaNoLocalStorage(texto) {
+    let cartas = JSON.parse(localStorage.getItem('cartas')) || [];
+    cartas.push(texto);
+    localStorage.setItem('cartas', JSON.stringify(cartas));
+}
+
+// Função para carregar as cartas salvas no Local Storage
+function carregarCartas() {
+    let cartas = JSON.parse(localStorage.getItem('cartas')) || [];
+    const listaCartas = document.getElementById('listaCartas');
+
+    cartas.forEach(texto => {
+        const carta = document.createElement('div');
+        carta.className = 'carta';
+        carta.textContent = texto;
+        listaCartas.appendChild(carta);
+    });
+}
+
+// Carregar fotos e cartas do Local Storage ao iniciar a página
+window.onload = function() {
+    carregarFotos();
+    carregarCartas();
+};

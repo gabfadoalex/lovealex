@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Cantinho</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Nosso Cantinho de Memórias</h1>
+        <p>Compartilhando nossos momentos especiais</p>
+    </header>
+
+    <!-- Área de upload de fotos -->
+    <section id="fotos">
+        <h2>Adicione suas Fotos</h2>
+        <input type="file" id="uploadFoto" accept="image/*">
+        <button onclick="adicionarFoto()">Adicionar Foto</button>
+        <div id="galeria"></div>
+    </section>
+
+    <!-- Área de textos e cartas -->
+    <section id="cartas">
+        <h2>Escreva uma Carta ou Texto</h2>
+        <textarea id="cartaTexto" placeholder="Escreva aqui sua carta ou texto..." rows="6" cols="50"></textarea><br>
+        <button onclick="adicionarCarta()">Adicionar Carta/Texto</button>
+        <div id="listaCartas"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Nosso Cantinho. Feito com amor.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
